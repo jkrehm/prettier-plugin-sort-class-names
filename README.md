@@ -50,6 +50,15 @@ you can add this options to your [prettier config file](https://prettier.io/docs
 | sortClassNamesClassAttributes         | Comma separated list of JSX attributes to sort tailwind classes in.                                                                                                                     | `"class,className,tw"`                     |
 | sortClassNamesSortFunctions           | Comma separated list of function names to sort classes in arguments.                                                                                                                    | `"clsx,classNames,cx"`                     |
 
+## parser support
+
+Supports
+
+- HTML
+- CSS (@apply directive)
+- JSX, TSX
+- [twin.marco](https://github.com/ben-rogerson/twin.macro)
+
 ## special thanks
 
 To [Acidic9](https://github.com/Acidic9) and his package [prettier-plugin-tailwind](https://github.com/Acidic9/prettier-plugin-tailwind).
