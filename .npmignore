@@ -5,3 +5,4 @@ src/
 ./tsconfig.json
 ./banner.jpg
 ./yarn-error.log
+.idea
