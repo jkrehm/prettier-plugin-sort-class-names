@@ -1,73 +1,57 @@
-[![npm version](https://badge.fury.io/js/prettier-plugin-tailwind.svg)](https://badge.fury.io/js/prettier-plugin-tailwind)
+# prettier-plugin-sort-class-names
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Acidic9/prettier-plugin-tailwind/master/banner.png">
-</p>
+Per default it will sort your class names alphabetically.
 
-<h1 align="center">Prettier Plugin Tailwind</h1>
+## install
 
-<div align="center">
-	Sort tailwind classes with Prettier.
-</div>
+Prettier should already be set up for your project ([check prettier docs](https://prettier.io/docs/en/install.html)). After that it is enough to install `prettier-plugin-sort-class-names` in the same project, it will be applied automatically.
 
-<br>
+```
+npm i prettier-plugin-sort-class-names --save-dev
+# or with yarn
+yarn add prettier-plugin-sort-class-names --dev
+```
 
-Supports
+## prettier-plugin-sort-class-names-order
 
-- HTML
-- CSS (@apply directive)
-- JSX, TSX
-- [twin.marco](https://github.com/ben-rogerson/twin.macro)
+You can create a file `prettier-plugin-sort-class-names-order` where every line represents a class name. The higher up a class is in the list, the further forward it is sorted. Example:
 
-**Go from this:**
+```
+flex
+block
+align-items-center
+```
+
+With this sorting-file, a node like 
 
 ```html
-<div class="z-50 z-10 container  text-left md:text-center justify-center">
-	...
-</div>
-```
+<div class="custom-class md:flex align-items-center block"></div>
+``` 
 
-**To this:**
+will become 
 
 ```html
-<div class="container justify-center text-left z-10 z-50 md:text-center">
-	...
-</div>
+<div class="custom-class / block align-items-center md:flex"></div>
 ```
 
-This plugin reads your `tailwind.config.js` to sort tailwind classes in your project.
+### existing order-lists
 
-## Installation VSCode
+- [tailwind with default config](https://gist.github.com/PutziSan/e5c1edcdaa540d8104f8e38712eca472#file-prettier-plugin-sort-class-names-order)
 
-Install Prettier and the plugin into your project locally:
+## custom prettier options
 
-```bash
-yarn add --dev prettier prettier-plugin-tailwind
-```
+you can add this options to your [prettier config file](https://prettier.io/docs/en/configuration.html):
 
-**Other IDE's are supported.**
+| option                                | description                                                                                                                                                                             | default                                    |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| sortClassNamesOrderFile               | Path to your custom `prettier-plugin-sort-class-names-order` file, if you not define anything, it will sort the class names alphabetically.                                             | `"prettier-plugin-sort-class-names-order"` |
+| sortClassNamesPrefixes                | comma seperated list of your prefixes. Prefixes will be grouped together wenn sorting.                                                                                                  | `"sm:,md:,lg:,xl:"`                        |
+| sortClassNamesUnknownClassesSeparator | When your class list contains known (in your order-file) and unknown class names, it will be separated by this char. You can disable this by providing an empty string as option (`""`) | `"/"`                                      |
+| sortClassNamesClassAttributes         | Comma separated list of JSX attributes to sort tailwind classes in.                                                                                                                     | `"class,className,tw"`                     |
+| sortClassNamesSortFunctions           | Comma separated list of function names to sort classes in arguments.                                                                                                                    | `"clsx,classNames,cx"`                     |
 
-Note: Prettier 2.0.0 or greater is required as a peer dependency.
+## special thanks
 
-## Prettier Options
+To [Acidic9](https://github.com/Acidic9) and his package [prettier-plugin-tailwind](https://github.com/Acidic9/prettier-plugin-tailwind).
 
-These options can be set in your `.prettierrc` file to change the behavious of this plugin.
-
-- [**`twConfig`**](OPTIONS.md#twconfig) - Path to tailwind config relative to the root of the project.
-- [**`twPluginsOrder`**](OPTIONS.md#twpluginsorder) - Comma separated order of tailwind plugins to sort classes by.
-- [**`twClassesPosition`**](OPTIONS.md#twclassesposition) - Position of component and utility classes.
-- [**`twUnknownClassesPosition`**](OPTIONS.md#twunknownclassesposition) - Position of unknown classes.
-- [**`twJsxClassAttributes`**](OPTIONS.md#twjsxclassattributes) - Comma separated list of JSX attributes to sort tailwind classes in.
-- [**`twSortFunctions`**](OPTIONS.md#twsortfunctions) - Comma separated list of function names to sort classes in arguments.
-
-More details can be found in [OPTIONS.md](OPTIONS.md)
-
-## Contributing 🙌
-
-Contributions are more than welcome. If you see any changes fit, go ahead and open an issue or PR.
-
----
-
-Any support is a huge motivation, thank you very much!
-
-<a href="https://www.buymeacoffee.com/ariseyhun" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy Me A Coffee" height="32" width="140"></a>
+If you want to sort your tailwind class names, you should give this package a shot and come back if you want to extend it with custom class names.

@@ -1,4 +1,4 @@
-import type TWClassesSorter from 'tailwind-classes-sorter'
+import { SortClassList } from '../sort-class-list'
 import groupNamesSorter from '../utils/group-names-sorter'
 
 const TW_MARCO_EXP = /(?:[A-z\-]+:)*\([^\)]*\)/g
@@ -8,7 +8,7 @@ const TW_MARCO_GROUP_CONTENT_EXP = /[A-z\-]+:\(([^\)]*)\)/
 // Formats Twin macro
 //   eg: `tw\`container w-full sm:(w-1/2)\``
 
-export default function twin(twClassesSorter: TWClassesSorter, node: any) {
+export default function twin(sortClassList: SortClassList, node: any) {
 	if (
 		node &&
 		node.type === 'TaggedTemplateExpression' &&
@@ -25,26 +25,24 @@ export default function twin(twClassesSorter: TWClassesSorter, node: any) {
 					names: string[]
 					content: string
 				}[] = []
-				const normalClasses = twClassesSorter
-					.sortClasslist(
-						rawValue.replace(TW_MARCO_EXP, str => {
-							const groupNames = str
-								.match(TW_MARCO_GROUP_NAMES_EXP)
-								.map(groupName => groupName.substr(0, groupName.length - 1))
-								.sort(groupNamesSorter())
+				const normalClasses = sortClassList(
+					rawValue.replace(TW_MARCO_EXP, str => {
+						const groupNames = str
+							.match(TW_MARCO_GROUP_NAMES_EXP)
+							.map(groupName => groupName.substr(0, groupName.length - 1))
+							.sort(groupNamesSorter())
 
-							const content = twClassesSorter
-								.sortClasslist(str.match(TW_MARCO_GROUP_CONTENT_EXP)[1])
-								.join(' ')
+						const content = sortClassList(
+							str.match(TW_MARCO_GROUP_CONTENT_EXP)[1]
+						).join(' ')
 
-							groups.push({
-								names: groupNames,
-								content,
-							})
-							return ''
+						groups.push({
+							names: groupNames,
+							content,
 						})
-					)
-					.join(' ')
+						return ''
+					})
+				).join(' ')
 
 				// Sort groups
 				groups.sort(groupNamesSorter<{ names: string[] }>(val => val.names[0]))

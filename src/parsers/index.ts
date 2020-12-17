@@ -1,12 +1,12 @@
-import type TWClassesSorter from 'tailwind-classes-sorter'
-import html from './html'
-import css from './css'
+import { CreateSortClassList, SortClassList } from '../sort-class-list'
 import babel from './babel'
+import css from './css'
+import html from './html'
 import typescript from './typescript'
 
-export default (twClassesSorter: TWClassesSorter) => ({
-	html: html(twClassesSorter),
-	css: css(twClassesSorter),
-	babel: babel(twClassesSorter),
-	typescript: typescript(twClassesSorter),
+export default (cscl: CreateSortClassList) => ({
+	html: html(cscl),
+	css: css(cscl),
+	babel: babel(cscl),
+	typescript: typescript(cscl),
 })

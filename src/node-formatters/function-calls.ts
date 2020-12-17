@@ -1,10 +1,10 @@
-import type TWClassesSorter from 'tailwind-classes-sorter'
+import { SortClassList } from '../sort-class-list'
 
 // Formats function calls
 //   eg: `clsx('container w-full')`
 
 export default function functionCalls(
-	twClassesSorter: TWClassesSorter,
+	sortClassList: SortClassList,
 	node: any,
 	functionNames: string[]
 ) {
@@ -23,11 +23,9 @@ export default function functionCalls(
 			const spacesBefore = arg.value.length - arg.value.trimStart().length
 			const spacesAfter = arg.value.length - arg.value.trimEnd().length
 
-			const newValue = `${' '.repeat(
-				spacesBefore
-			)}${twClassesSorter.sortClasslist(arg.value).join(' ')}${' '.repeat(
-				spacesAfter
-			)}`
+			const newValue = `${' '.repeat(spacesBefore)}${sortClassList(
+				arg.value
+			).join(' ')}${' '.repeat(spacesAfter)}`
 
 			if (arg.type === 'StringLiteral') {
 				arg.value = newValue

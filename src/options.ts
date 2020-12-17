@@ -1,40 +1,33 @@
 export default {
-	twConfig: {
+	sortClassNamesOrderFile: {
 		type: 'string',
 		category: 'Global',
-		default: '',
+		default: 'prettier-plugin-sort-class-names-order',
 		description:
-			'Path to tailwind config relative to the root of the project; "" will attempt to find a tailwind.config.js file recursively.',
+			'Path to your custom prettier-plugin-sort-class-names-order, if you not define anything, it will sort the class names alphabetically.',
 	},
-	twPluginsOrder: {
+	sortClassNamesPrefixes: {
 		type: 'string',
 		category: 'Global',
-		default:
-			'container,position,zIndex,inset,display,flex,flexDirection,flexGrow,flexShrink,flexWrap,gap,gridAutoFlow,gridColumn,gridColumnEnd,gridColumnStart,gridRow,gridRowEnd,gridRowStart,gridTemplateColumns,gridTemplateRows,alignContent,alignItems,alignSelf,justifyContent,justifyItems,justifySelf,verticalAlign,placeContent,placeItems,placeSelf,float,clear,order,tableLayout,margin,padding,width,minWidth,maxWidth,height,maxHeight,minHeight,textAlign,textColor,textDecoration,textOpacity,wordBreak,whitespace,fontFamily,fontSize,fontSmoothing,fontStyle,fontVariantNumeric,fontWeight,letterSpacing,lineHeight,backgroundColor,backgroundImage,backgroundSize,backgroundPosition,backgroundRepeat,backgroundAttachment,backgroundClip,backgroundOpacity,borderWidth,borderStyle,borderColor,borderOpacity,borderRadius,borderCollapse,placeholderColor,placeholderOpacity,outline,fill,stroke,strokeWidth,boxShadow,gradientColorStops,opacity,visibility,accessibility,appearance,boxSizing,cursor,pointerEvents,userSelect,divideColor,divideOpacity,divideStyle,divideWidth,listStylePosition,listStyleType,objectFit,objectPosition,overflow,overscrollBehavior,transform,transformOrigin,translate,textTransform,resize,rotate,scale,skew,space,animation,transitionProperty,transitionDuration,transitionDelay,transitionTimingFunction,preflight',
+		default: 'sm:,md:,lg:,xl:',
 		description:
-			'Comma separated order of tailwind plugins to sort classes by; "" will use the plugins in alphabetical order.',
+			'Comma separated list of your prefixes. Prefixes will be grouped together wenn sorting.',
 	},
-	twClassesPosition: {
+	sortClassNamesUnknownClassesSeparator: {
 		type: 'string',
 		category: 'Global',
-		default: 'components-first',
+		default: '/',
 		description:
-			'Position of component and utility classes; "components-first" | "components-last" | "as-is"',
+			'When your class list contains known (in your order-file) and unknown class names, it will be separated by this char. You can disable this by providing an empty string as option (`""`)',
 	},
-	twUnknownClassesPosition: {
-		type: 'string',
-		category: 'Global',
-		default: 'start',
-		description: 'Position of unknown classes; "start" | "end"',
-	},
-	twJsxClassAttributes: {
+	sortClassNamesClassAttributes: {
 		type: 'string',
 		category: 'Global',
 		default: 'class,className,tw',
 		description:
 			'Comma separated list of JSX attributes to sort tailwind classes in.',
 	},
-	twSortFunctions: {
+	sortClassNamesSortFunctions: {
 		type: 'string',
 		category: 'Global',
 		default: 'clsx,classNames,cx',
