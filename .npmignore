@@ -6,3 +6,5 @@ src/
 ./banner.jpg
 ./yarn-error.log
 .idea
+test.js
+tsconfig.json
