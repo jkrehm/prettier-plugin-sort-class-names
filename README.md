@@ -12,6 +12,8 @@ npm i prettier-plugin-sort-class-names --save-dev
 yarn add prettier-plugin-sort-class-names --dev
 ```
 
+> If you are using yarn 2 (aka Plug'n'Play/PnP, aka "berry"), check [the troubleshooting section at the bottom](#plugin-is-not-automatically-detected-with-yarn-2)
+
 ## prettier-plugin-sort-class-names-order
 
 You can create a file `prettier-plugin-sort-class-names-order` where every line represents a class name. The higher up a class is in the list, the further forward it is sorted. Example:
@@ -22,13 +24,13 @@ block
 align-items-center
 ```
 
-With this sorting-file, a node like 
+With this sorting-file, a node like
 
 ```html
 <div class="custom-class md:flex align-items-center block"></div>
-``` 
+```
 
-will become 
+will become
 
 ```html
 <div class="custom-class / block align-items-center md:flex"></div>
@@ -58,6 +60,23 @@ Supports
 - CSS (@apply directive)
 - JSX, TSX
 - [twin.marco](https://github.com/ben-rogerson/twin.macro)
+
+## troubleshooting
+
+### plugin is not automatically detected with yarn 2
+
+1. make sure to use `prettier.config.js` (if you are currently using `.prettierrc` et al you have to change to the js-variant)
+1. add the `plugins` section:
+
+```javascript
+module.exports = {
+	plugins: [require('prettier-plugin-sort-class-names')],
+	// ... your other config-keys like:
+	printWidth: 120,
+}
+```
+
+> check [prettier issue #7073](https://github.com/prettier/prettier/issues/7073#issuecomment-711954542) for more information
 
 ## special thanks
 
