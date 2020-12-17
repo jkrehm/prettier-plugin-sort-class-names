@@ -1,6 +1,6 @@
 {
 	"name": "prettier-plugin-sort-class-names",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Sort classes with prettier",
 	"author": "Putzi San <putzisan@putzisan.de>",
 	"homepage": "https://github.com/PutziSan/prettier-plugin-sort-class-names",
