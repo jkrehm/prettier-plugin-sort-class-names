@@ -1,10 +1,11 @@
-import prettierParserHTML from 'prettier/parser-html'
-import { CreateSortClassList, SortClassList } from '../sort-class-list'
+import { type ParserOptions } from 'prettier'
+import * as prettierPluginHTML from 'prettier/plugins/html'
+import { CreateSortClassList, type Options } from '../sort-class-list'
 
 export default (cscl: CreateSortClassList) => ({
-	...prettierParserHTML.parsers.html,
-	parse(text, parsers, options) {
-		const ast = prettierParserHTML.parsers.html.parse(text, parsers, options)
+	...prettierPluginHTML.parsers.html,
+	async parse(text: string, options: ParserOptions & Options) {
+		const ast = await prettierPluginHTML.parsers.html.parse(text, options)
 
 		const cleanElementClasses = el => {
 			if (el.attrs) {

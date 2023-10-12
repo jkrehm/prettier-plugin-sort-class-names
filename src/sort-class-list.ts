@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import options from './options'
 
-type Options = Record<keyof typeof options, string>
+export type Options = Record<keyof typeof options, string>
 
 const prefixCache: Record<string, string[]> = {}
 

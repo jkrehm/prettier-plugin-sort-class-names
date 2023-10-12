@@ -1,6 +1,7 @@
-const fs = require('fs')
-const path = require('path')
+const { it } = require('node:test')
+const assert = require('node:assert/strict')
 const prettier = require('prettier')
+const prettierPluginSortClassNames = require('./prettier-plugin-sort-class-names')
 
 const code = `
 <!DOCTYPE html>
@@ -38,9 +39,25 @@ const code = `
   </body>
 </html>
 `
-const output = prettier.format(code, {
-	parser: 'html',
-	pluginSearchDirs: ['./'],
-	plugins: ['./prettier-plugin-sort-class-names'],
+
+it('should sort class names', async () => {
+	const output = await prettier.format(code, {
+		parser: 'html',
+		plugins: [prettierPluginSortClassNames],
+	})
+
+	assert.match(
+		output,
+		/<div class="py-2 bg-black text-gray-100 text-sm text-center">/
+	)
+
+	assert.match(
+		output,
+		/<a href="#" class="w-3\/12 bg-red-100 text-xl font-black">/
+	)
+
+	assert.match(
+		output,
+		/<div class="flex items-center justify-between w-3\/12 bg-red-100">/
+	)
 })
-console.log(output)
